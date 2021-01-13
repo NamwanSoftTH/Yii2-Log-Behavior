@@ -60,7 +60,7 @@ class LogBehavior extends Behavior
             $newAttrVal = $owner->getAttribute($attrName);
 
             if ($newAttrVal != $attrVal) {
-                $diff[$attrName] = (object) ['old' => $attrVal, 'new' => $newAttrVal];
+                $diff[$attrName] = ['old' => $attrVal, 'new' => $newAttrVal];
             }
         }
         $diff = $this->applyExclude($diff);
@@ -69,7 +69,7 @@ class LogBehavior extends Behavior
             $modelL = $event->sender;
 
             $model = new Log();
-            $model->change_attributes = Json::encode((object) $diff);
+            $model->change_attributes = Json::encode($diff);
             $model->event = $event->name;
             $model->object = $modelL::className();
             $model->user = Yii::$app->user->id ?? null;
@@ -78,12 +78,12 @@ class LogBehavior extends Behavior
         }
     }
 
-    public function DeleteLog()
+    public function DeleteLog(Event $event)
     {
         $modelL = $event->sender;
 
         $model = new Log();
-        $model->change_attributes = Json::encode($diff);
+        $model->change_attributes = Json::encode($event->sender->oldAttributes);
         $model->event = $event->name;
         $model->object = $modelL::className();
         $model->user = Yii::$app->user->id ?? null;
