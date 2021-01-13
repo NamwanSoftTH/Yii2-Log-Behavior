@@ -20,7 +20,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "namwansoftth\\yii2-log-behavior\\": "src"
+      "namwansoftth\\log\\": "src"
     }
   },
   "require": {
