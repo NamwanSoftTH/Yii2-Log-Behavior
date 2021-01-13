@@ -80,10 +80,10 @@ class LogBehavior extends Behavior
 
     public function DeleteLog()
     {
-        $logEvent = new Log();
-        $logEvent->relatedObject = $this->owner;
-        $logEvent->data = '';
-        $logEvent->type = self::DELETED;
-        $logEvent->save();
+        // $logEvent = new Log();
+        // $logEvent->relatedObject = $this->owner;
+        // $logEvent->data = '';
+        // $logEvent->type = self::DELETED;
+        // $logEvent->save();
     }
 }
