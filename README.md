@@ -22,27 +22,8 @@ Configure the behavior
 public function behaviors()
 {
     return [
-        \namwansoftth\log\LogBehavior::className()
-    ];
+            'class' => \namwansoftth\log\LogBehavior::className(),
+            'excludedAttributes' => ['created_at', 'updated_at'],
+        ],
 }
 ```
-
-### Ignoring attributes
-
-In the model, just define an attribute **$logIgnoredAttributes** which is an array of string, representings the properties you wish to ignore.
-
-```
-public $logIgnoredAttributes = ['attribute1', 'attribute2'];
-```
-
-If $logIgnoredAttributes is not defined, every attribute will be logged.
-
-## TODO
-
-Right now, logs are just saved in the database, in a table named app_log_model_behavior
-
-Maybe we should:
-
-- create a simple UI to view the logs.
-- some method to view the log of a particular model.
-- some way to restore a model to a particular log.
