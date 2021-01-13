@@ -1,6 +1,6 @@
 <?php
 
-namespace namwansoftth\ModelLog;
+namespace namwansoftth\log;
 
 use Yii;
 use yii\base\Behavior;
