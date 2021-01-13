@@ -5,6 +5,7 @@ namespace namwansoftth\ModelLog;
 use Yii;
 use yii\base\Behavior;
 use yii\base\Event;
+use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 class LogBehavior extends Behavior
