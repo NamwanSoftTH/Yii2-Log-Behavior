@@ -8,6 +8,12 @@ Install via composser
 composer require namwansoftth/yii2-log-behavior
 ```
 
+or add to composser.json
+
+```
+"namwansoftth/yii2-log-behavior": "@dev"
+```
+
 Apply migrations:
 
 ```
