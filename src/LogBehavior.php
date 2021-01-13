@@ -16,9 +16,9 @@ class LogBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_INSERT  => 'AddLog',
-            ActiveRecord::EVENT_AFTER_UPDATE  => 'AddLog',
-            ActiveRecord::EVENT_BEFORE_DELETE => 'DeleteLog',
+            ActiveRecord::EVENT_AFTER_INSERT => 'AddLog',
+            ActiveRecord::EVENT_AFTER_UPDATE => 'AddLog',
+            ActiveRecord::EVENT_AFTER_DELETE => 'DeleteLog',
         ];
     }
 
@@ -83,7 +83,7 @@ class LogBehavior extends Behavior
         $modelL = $event->sender;
 
         $model = new Log();
-        $model->change_attributes = Json::encode($event->sender->attributes);
+        $model->change_attributes = Json::encode($event->sender->oldAttributes);
         $model->event = $event->name;
         $model->object = $modelL::className();
         $model->user = Yii::$app->user->id ?? null;
