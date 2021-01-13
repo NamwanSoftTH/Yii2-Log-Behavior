@@ -60,7 +60,7 @@ class LogBehavior extends Behavior
             $newAttrVal = $owner->getAttribute($attrName);
 
             if ($newAttrVal != $attrVal) {
-                $diff[$attrName] = ['old' => $attrVal, 'new' => $newAttrVal];
+                $diff[$attrName] = (object) ['old' => $attrVal, 'new' => $newAttrVal];
             }
         }
         $diff = $this->applyExclude($diff);
