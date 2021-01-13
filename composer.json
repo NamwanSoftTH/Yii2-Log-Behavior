@@ -1,0 +1,29 @@
+{
+  "name": "namwansoftth/yii2-log-behavior",
+  "description": "A simple log behavior for Yii2 models.",
+  "type": "yii2-extension",
+  "license": "MIT",
+  "keywords": [
+    "yii2",
+    "extension",
+    "log",
+    "behavior",
+    "model"
+  ],
+  "authors": [
+    {
+      "name": "NamwanSoftTH",
+      "email": "namwansoft@gmail.com",
+      "homepage": "https://namwansoftth.github.io",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "namwansoftth\\yii2-log-behavior\\": "src"
+    }
+  },
+  "require": {
+    "yiisoft/yii2": "*"
+  }
+}
