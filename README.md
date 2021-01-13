@@ -22,7 +22,7 @@ Configure the behavior
 public function behaviors()
 {
     return [
-            'class' => \namwansoftth\log\LogBehavior::className(),
+            'class' => \namwansoftth\ModelLog\LogBehavior::className(),
             'excludedAttributes' => ['created_at', 'updated_at'],
         ],
 }
