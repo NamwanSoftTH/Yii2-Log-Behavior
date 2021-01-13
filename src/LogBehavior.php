@@ -53,8 +53,11 @@ class LogBehavior extends Behavior
     {
         $modelL = $event->sender;
 
+        $diff = $modelL->attributes;
+        $diff = $this->applyExclude($diff);
+
         $model = new Log();
-        $model->change_attributes = Json::encode($event->sender->attributes);
+        $model->change_attributes = Json::encode($diff);
         $model->event = $event->name;
         $model->object = $modelL::className();
         $model->user = Yii::$app->user->id ?? null;
@@ -101,7 +104,7 @@ class LogBehavior extends Behavior
         $modelL = $event->sender;
 
         $model = new Log();
-        $model->change_attributes = Json::encode($event->sender->attributes);
+        $model->change_attributes = Json::encode($modelL->attributes);
         $model->event = $event->name;
         $model->object = $modelL::className();
         $model->user = Yii::$app->user->id ?? null;
