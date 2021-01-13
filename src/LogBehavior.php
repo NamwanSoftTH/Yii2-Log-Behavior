@@ -16,8 +16,8 @@ class LogBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_INSERT => 'AddLog',
-            ActiveRecord::EVENT_AFTER_UPDATE => 'AddLog',
+            ActiveRecord::EVENT_AFTER_INSERT => 'InsertLog',
+            ActiveRecord::EVENT_AFTER_UPDATE => 'UpdateLog',
             ActiveRecord::EVENT_AFTER_DELETE => 'DeleteLog',
         ];
     }
@@ -49,7 +49,23 @@ class LogBehavior extends Behavior
     /**
      * @param \yii\base\Event $event
      */
-    public function AddLog(Event $event)
+    public function InsertLog(Event $event)
+    {
+        $modelL = $event->sender;
+
+        $model = new Log();
+        $model->change_attributes = Json::encode($event->sender->attributes);
+        $model->event = $event->name;
+        $model->object = $modelL::className();
+        $model->user = Yii::$app->user->id ?? null;
+        $model->created_at = time();
+        $model->save();
+    }
+
+    /**
+     * @param \yii\base\Event $event
+     */
+    public function UpdateLog(Event $event)
     {
         $owner = $this->owner;
         $changedAttributes = $event->changedAttributes;
@@ -60,7 +76,7 @@ class LogBehavior extends Behavior
             $newAttrVal = $owner->getAttribute($attrName);
 
             if ($newAttrVal != $attrVal) {
-                $diff[$attrName] = (object) ['old' => $attrVal, 'new' => $newAttrVal];
+                $diff[$attrName] = (object) [$attrVal, $newAttrVal];
             }
         }
         $diff = $this->applyExclude($diff);
@@ -77,7 +93,9 @@ class LogBehavior extends Behavior
             $model->save();
         }
     }
-
+    /**
+     * @param \yii\base\Event $event
+     */
     public function DeleteLog(Event $event)
     {
         $modelL = $event->sender;
