@@ -88,7 +88,7 @@ class LogBehavior extends Behavior
             $modelL = $event->sender;
 
             $model = new Log();
-            $model->change_attributes = Json::encode($diff);
+            $model->change_attributes = Json::encode((object) $diff);
             $model->event = $event->name;
             $model->object = $modelL::className();
             $model->user = Yii::$app->user->id ?? null;
